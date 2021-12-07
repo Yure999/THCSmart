@@ -1,5 +1,5 @@
   // base measures
-  const int dryValue = 450;
+  const int dryValue = 440;
   const int waterValue = 250;
   
   // ideal moisture value
@@ -19,19 +19,21 @@ void loop() {
 
   int currentMoisture;
   currentMoisture = (sensor0Value + sensor1Value) / 2;
-  
+
+  String message;
 
   if(currentMoisture == idealMoisture) {
-    Serial.print("Humedad perfecta");
+    message = "Humedad perfecta";
   } else if(currentMoisture < idealMoisture && currentMoisture > waterValue) {
-    Serial.print("Demasiada humedad");
+    message = "Demasiada humedad";
   } else if(currentMoisture < waterValue) {
-    Serial.print("Las plantas se estan ahogando");
+    message = "Las plantas se estan ahogando";
   } else if(currentMoisture > idealMoisture && currentMoisture < dryValue) {
-    Serial.print("No les vendria mal un poco de agua");
+    message = "No les vendria mal un poco de agua";
   } else if (currentMoisture > dryValue) {
-    Serial.print("la tierra esta seca");
+    message = "la tierra esta seca";
   }
+  Serial.print(message);
   Serial.println(currentMoisture);
   delay(800);
 }
